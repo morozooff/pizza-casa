@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Pizzeria Catalog</h1>
+        {% for key, values in products.items%}
+        <article class = "media content-section">
+            <div class = "media-body">
+            <h2>{{key}}</h2>
+            <div class="row row-cols-1 row-cols-md-3 g-4">
+            {% for item in values %}
+            {% with item as product%}
+                <div class="col">
+                <div class="card h-100">
+                  <img src="{{product.avatar.url}}" class="card-img-top" alt="">
+                  <div class="card-body">
+                    <h5 class="card-title"> <a class = "article-title" href = "{% url 'product-detail' product.id %}">{{product.title}}</a> </h5>
+                    <a href = "{% url 'product-detail' product.id %}" class="btn btn-outline-warning btn-lg">{{product.base_cost}} coins</a>
+                  </div>
+                </div>
+                </div>
+            {% endwith %}
+            {% endfor %}
+            </div>
+            </div>
+        </article>
+        {% endfor %}
+{% endblock content %}

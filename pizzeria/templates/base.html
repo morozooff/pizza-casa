@@ -1,0 +1,56 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- Обязательные мета-теги -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap, иконки и шрифт -->
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+     <link href='http://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,400italic,500,500italic,700,700italic,900italic,900' rel='stylesheet' type='text/css'>
+     <link rel="stylesheet" type="text/css" href="{% static 'main.css' %}">
+     <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
+</head>
+
+  <body>
+    <header class="site-header">
+        <nav class="navbar navbar-expand-lg bg-body-tertiary fixed-top" style="background-color: #ffd06f;">
+          <div class="container-fluid">
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+              <div class="navbar-nav" style="color: #560319;">
+                <img src="https://cdn-icons-png.flaticon.com/512/6978/6978255.png" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
+                  <a class="nav-link active" href="{% url 'home'%}">Home</a>
+                  <a class="nav-link active" href="{% url 'catalog'%}">Catalog</a>
+                  <a class="nav-link active" href="{% url 'about'%}">About</a>
+                  <a class="nav-link active" href="#">My Cart</a>
+              </div>
+            </div>
+              <div class="navbar-nav">
+                {% if user.is_authenticated %}
+            	<a class="nav-item nav-link" href="#">Sign in</a>
+            	<a class="nav-item nav-link" href="#">Sign out</a>
+          	    {% else %}
+            	<a class="nav-item nav-link" href="#">Sign in</a>
+            	<a class="nav-item nav-link" href="#">Register</a>
+          	    {% endif %}
+            </div>
+          </div>
+        </nav>
+    </header>
+  </body>
+    {% block content %}{% endblock %}
+
+    </main>
+    <!-- Футер закреплен внизу, независимо от количества постов на странице -->
+    <footer class="text-center bg-dark">
+        <p><a>Pizzeria Pizza Casa</a></p>
+    </footer>
+
+    <!-- Дополнительные скрипты JavaScript -->
+    <!-- Сначала jQuery, затем Popper.js, последним Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+</html>
