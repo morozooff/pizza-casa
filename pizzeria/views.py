@@ -39,5 +39,17 @@ class ProductDetail(generics.RetrieveAPIView):
 
     def get(self, request, *args, **kwargs):
         self.object = self.get_object()
-        return Response({'product': self.object}, template_name = 'product-detail.html')
+        ingredients = self.object.ingredients
+
+        if ingredients:
+            ingredient_list = ingredients.split(',')
+
+            formatted_ingredient_list = []
+
+            for ingredient in ingredient_list:
+                formatted_ingredient_list.append(ingredient.strip())
+        else:
+            formatted_ingredient_list = []
+
+        return Response({'product': self.object, 'ingredients': formatted_ingredient_list}, template_name = 'product-detail.html')
 

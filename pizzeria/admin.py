@@ -10,4 +10,4 @@ class CategoryAdmin(admin.ModelAdmin):
 
 @register(Product)
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ['title', 'base_cost', 'description', 'avatar', 'category', ]
+    list_display = ['title', 'base_cost', 'description', 'avatar', 'category', 'ingredients', ]

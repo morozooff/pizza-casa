@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
     <article class = "media content-section">
-            <div class="card mb-3" style="max-width: 1000px;">
+            <div class="card mb-3" style="max-width: 1200px;">
               <div class="row g-0">
                 <div class="col-md-4">
                   <img src="{{product.avatar.url}}" class="img-fluid rounded-start" alt="ligts">
@@ -10,6 +10,16 @@
                   <div class="card-body">
                     <h1 class="card-title">{{product.title}}</h1>
                     <p class="card-text">{{product.description}}</p>
+
+                      {% if ingredients.0 %}
+                      <h4>Ingredients</h4>
+                      <ul>
+                          {% for ingredient in ingredients%}
+                          <li>{{ingredient}}</li>
+                          {%endfor%}
+                      </ul>
+                      {% endif %}
+
                     <a href="#" class="btn btn-outline-warning btn-lg">{{product.base_cost}} coins</a>
                   </div>
                 </div>
