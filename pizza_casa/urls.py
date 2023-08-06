@@ -23,5 +23,6 @@ from pizzeria import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('pizzeria/', include('pizzeria.urls')),
+    path('users/', include('users.urls')),
     path('', views.home, name = "home"),
 ] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
