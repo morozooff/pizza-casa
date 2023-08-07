@@ -133,13 +133,12 @@ MEDIA_URL = '/media/'
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 CRISPY_TEMPLATE_PACK = 'bootstrap5'
 
+# for basket
+CART_SESSION_ID = 'cart'
+
 # Path for images
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-
 
 # for login_required
 LOGIN_URL = 'sign-in'
 LOGIN_REDIRECT_URL = 'home'
-
-
-
