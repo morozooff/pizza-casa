@@ -15,17 +15,17 @@ class Cart(object):
         self.cart = cart
 
 
-    def add(self, book, quantity = 1, update_quantity = False):
+    def add(self, product, quantity = 1, update_quantity = False):
 
-        book_id = book.id
+        product_id = product.id
 
-        if book_id not in self.cart:
-            self.cart[str(book_id)] = {'quantity': 0, 'cost': book.base_cost}
+        if product_id not in self.cart:
+            self.cart[str(product_id)] = {'quantity': 0, 'cost': product.base_cost}
 
         if update_quantity:
-            self.cart[str(book_id)]['quantity'] = quantity
+            self.cart[str(product_id)]['quantity'] = quantity
         else:
-            self.cart[str(book_id)]['quantity'] += quantity
+            self.cart[str(product_id)]['quantity'] += quantity
 
 
         self.save()
@@ -36,15 +36,48 @@ class Cart(object):
 
 
 
-    def remove(self, book):
-        book_id = book.id
+    def remove(self, product):
+        product_id = product.id
 
-        if book_id in self.cart:
-            self.cart[str(book_id)]['quantity'] -= 1
+        if product_id in self.cart:
+            self.cart[str(product_id)]['quantity'] -= 1
         ##
 
-        if self.cart[str(book_id)]['quantity'] < 1:
-            del self.cart[str(book_id)]
+        if self.cart[str(product_id)]['quantity'] < 1:
+            del self.cart[str(product_id)]
         self.save()
 
 
+    def __iter__(self):
+
+        product_ids = self.cart.keys()
+
+        products = Product.objects.filter(id_in = product_ids)
+
+        for product in products:
+            self.cart[str(product.id)]['product'] = product
+
+        for item in self.cart.values():
+
+            item['total_cost'] = item['cost'] * item['quantity']
+
+            yield item
+
+
+    def __len__(self):
+        return sum([item['cost'] for item in self.cart.values()])
+
+
+    def get_total_price(self):
+        total_price = 0
+
+        for item in self.cart.values():
+            total_price += item['total_cost']
+
+        return total_price
+
+    def clear(self):
+
+        del self.session[settings.CART_SESSION_ID]
+
+        self.session.modified = True
