@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load crispy_forms_tags %}
 {% block content %}
     <article class = "media content-section">
             <div class="card mb-3" style="max-width: 1200px;">
@@ -9,7 +10,7 @@
                 <div class="col-md-8">
                   <div class="card-body">
                     <h1 class="card-title">{{product.title}}</h1>
-                    <p class="card-text">{{product.description}}</p>
+                    <p class="card-text">{{product.description}}></p>
 
                       {% if ingredients.0 %}
                       <h4>Ingredients</h4>
@@ -19,8 +20,17 @@
                           {%endfor%}
                       </ul>
                       {% endif %}
+                      <div class="article-metadata">
+                      </div>
+                          <h4> Base product cost: {{product.base_cost}} coins</h4>
+                          <h3>Add to my cart</h3>
 
-                    <a href="#" class="btn btn-outline-warning btn-lg">{{product.base_cost}} coins</a>
+
+                              <form action = "{% url 'cart-add' product.id%}" method="POST">
+                                  {{ form|crispy }}
+                                  {% csrf_token %}
+                                  <input class="btn btn-outline-warning btn-lg" type="submit" value="Add to cart">
+                              </form>
                   </div>
                 </div>
               </div>

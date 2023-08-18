@@ -12,6 +12,7 @@ from pizzeria.models import Product
 
 
 @api_view()
+@renderer_classes([TemplateHTMLRenderer])
 def cart_add(request: Request, product_id: int) -> HttpResponseRedirect:
     cart = Cart(request)
     product = get_object_or_404(Product, id=product_id)
@@ -25,6 +26,7 @@ def cart_add(request: Request, product_id: int) -> HttpResponseRedirect:
 
 
 @api_view()
+@renderer_classes([TemplateHTMLRenderer])
 def cart_remove(request: Request, product_id: int) -> HttpResponseRedirect:
     cart = Cart(request)
     product = get_object_or_404(Product, id=product_id)

@@ -1,6 +1,6 @@
 from django import forms
 
-PRODUCTS_VALUE_CHOICES = [1, 2, 3, 4, 5]
+PRODUCTS_VALUE_CHOICES = [(i, str(i)) for i in range(1, 20)]
 
 
 class AddToCartForm(forms.Form):
