@@ -11,7 +11,7 @@ from .cart import Cart
 from pizzeria.models import Product
 
 
-@api_view()
+@api_view(['POST', ])
 @renderer_classes([TemplateHTMLRenderer])
 def cart_add(request: Request, product_id: int) -> HttpResponseRedirect:
     cart = Cart(request)
@@ -20,7 +20,7 @@ def cart_add(request: Request, product_id: int) -> HttpResponseRedirect:
 
     if form.is_valid():
         form_data = form.cleaned_data
-        cart.add(product=product, quantity=form_data.get(['quantity']), update_quantity=form_data.get(['update']))
+        cart.add(product=product, quantity=form_data['quantity'], update_quantity=form_data['update'])
 
     return HttpResponseRedirect(redirect_to=reverse('cart-detail'))
 
