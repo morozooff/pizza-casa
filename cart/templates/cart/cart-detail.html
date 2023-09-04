@@ -1,4 +1,48 @@
 {% extends "base.html" %}
 {% block content %}
-    <p>this is a cart</p>
+     <h1>Your cart</h1>
+    <article class = "media content-section">
+        <div class = "media-body">
+            <table border="1" align="center">
+            <thead>
+            <tr>
+                    <th>Avatar</th>
+                    <th>Product</th>
+                    <th>Quantity</th>
+                    <th>Cost</th>
+                    <th>Total</th>
+                    <th>Delete</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for item in cart %}
+                {% with product=item.product %}
+                    <tr>
+                        <td>
+                            <a href="{% url 'product-detail' product.id %}">
+                                <img src="{{ product.avatar.url }}" alt="Lights">
+                            </a>
+                        </td>
+                        <td>{{ product.title }}</td>
+                        <td>{{ item.quantity }}</td>
+                        <td>{{ item.cost }}</td>
+                        <td>{{ item.total_cost }}</td>
+                        <td><a class = "btn btn-outline-danger btn-lg" href="{% url 'cart-remove' product.id%}">Delete</a></td>
+                    </tr>
+                {% endwith %}
+            {% endfor %}
+            </tbody>
+            </table>
+            <p>
+                {% if cart.get_total_price != 0%}
+                    <h3>To paying: {{cart.get_total_price}} coins</h3>
+                    <a href="{% url 'catalog' %}" class = "btn btn-outline-warning btn-lg">Continue</a>
+                    <a href="#" class="btn btn-outline-success btn-lg">Order</a>
+                {% else %}
+                    <h3>Ваша корзина пуста</h3>
+                    <a href="{% url 'catalog' %}" class = "btn btn-outline-warning btn-lg">Continue</a>
+                {% endif %}
+            </p>
+        </div>
+        </article>
 {% endblock content %}

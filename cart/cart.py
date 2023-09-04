@@ -17,15 +17,15 @@ class Cart(object):
 
     def add(self, product, quantity = 1, update_quantity = False):
 
-        product_id = product.id
+        product_id = str(product.id)
 
         if product_id not in self.cart:
-            self.cart[str(product_id)] = {'quantity': 0, 'cost': product.base_cost}
+            self.cart[product_id] = {'quantity': 0, 'cost': product.base_cost}
 
         if update_quantity:
-            self.cart[str(product_id)]['quantity'] = quantity
+            self.cart[product_id]['quantity'] = quantity
         else:
-            self.cart[str(product_id)]['quantity'] += quantity
+            self.cart[product_id]['quantity'] += quantity
 
 
         self.save()
@@ -37,23 +37,22 @@ class Cart(object):
 
 
     def remove(self, product):
-        product_id = product.id
+        product_id = str(product.id)
 
         if product_id in self.cart:
-            self.cart[str(product_id)]['quantity'] -= 1
-        ##
+            self.cart[product_id]['quantity'] -= 1
 
-        if self.cart[str(product_id)]['quantity'] < 1:
-            del self.cart[str(product_id)]
+        if self.cart[product_id]['quantity'] < 1:
+            del self.cart[product_id]
         self.save()
 
 
     def __iter__(self):
 
         product_ids = self.cart.keys()
-
-        products = Product.objects.filter(id_in = product_ids)
-
+    ##
+        products = Product.objects.filter(id__in = product_ids)
+    ##
         for product in products:
             self.cart[str(product.id)]['product'] = product
 
