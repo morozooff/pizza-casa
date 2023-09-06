@@ -37,7 +37,6 @@ class ProductList(generics.ListAPIView):
                         template_name='product-list.html' )
 
 
-
 class ProductDetail(APIView):
     renderer_classes = [TemplateHTMLRenderer]
 
@@ -59,49 +58,4 @@ class ProductDetail(APIView):
             formatted_ingredient_list = []
 
         return Response({'product': self.product, 'ingredients': formatted_ingredient_list, 'form': form}, template_name = 'product-detail.html')
-#
-# class ProductDetail(generics.RetrieveAPIView):
-#     queryset = Product.objects.all()
-#     renderer_classes = [TemplateHTMLRenderer]
-#
-#     def get(self, request, *args, **kwargs):
-#         self.object = self.get_object()
-#         ingredients = self.object.ingredients
-#
-        # form = AddToCartForm(initial={'product': self.object})
-        #
-        # if ingredients:
-        #     ingredient_list = ingredients.split(',')
-        #
-        #     formatted_ingredient_list = []
-        #
-        #     for ingredient in ingredient_list:
-        #         formatted_ingredient_list.append(ingredient.strip())
-        # else:
-        #     formatted_ingredient_list = []
-#
-#         return Response({'product': self.object, 'ingredients': formatted_ingredient_list, 'form': form}, template_name = 'product-detail.html')
-#
-#     def post(self, request, *args, **kwargs):
-#
-#         self.object = self.get_object()
-#         ingredients = self.object.ingredients
-#
-#         form = AddToCartForm(initial={'product': self.object})
-#         if form.is_valid():
-#             form.save()
-#
-#         if ingredients:
-#             ingredient_list = ingredients.split(',')
-#
-#             formatted_ingredient_list = []
-#
-#             for ingredient in ingredient_list:
-#                 formatted_ingredient_list.append(ingredient.strip())
-#         else:
-#             formatted_ingredient_list = []
-#
-#         return Response({'product': self.object, 'ingredients': formatted_ingredient_list, 'form': form},
-#                         template_name='product-detail.html')
-#
-#
+

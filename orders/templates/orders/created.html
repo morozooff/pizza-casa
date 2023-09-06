@@ -1,0 +1,7 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Thx for your order, {{ order.customer.username}}</h1>
+    <p>Your order was made successful. Your order number
+        <strong>{{ order.id }}</strong>.</p>
+{% endblock %}
