@@ -3,8 +3,8 @@
      <h1>Your cart</h1>
     <article class = "media content-section">
         <div class = "media-body">
-            <table border="1" align="center">
-            <thead>
+            <table class="table" border="1" align="center">
+            <thead class="table-warning">
             <tr>
                     <th>Avatar</th>
                     <th>Product</th>
@@ -20,13 +20,13 @@
                     <tr>
                         <td>
                             <a href="{% url 'product-detail' product.id %}">
-                                <img src="{{ product.avatar.url }}" alt="Lights">
+                                <img class="img-thumbnail" src="{{ product.avatar.url }}" alt="Lights">
                             </a>
                         </td>
                         <td>{{ product.title }}</td>
                         <td>{{ item.quantity }}</td>
-                        <td>{{ item.cost }}</td>
-                        <td>{{ item.total_cost }}</td>
+                        <td>{{ item.cost }} coins</td>
+                        <td>{{ item.total_cost }} coins</td>
                         <td><a class = "btn btn-outline-danger btn-lg" href="{% url 'cart-remove' product.id%}">Delete</a></td>
                     </tr>
                 {% endwith %}

@@ -141,4 +141,4 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # for login_required
 LOGIN_URL = 'sign-in'
-LOGIN_REDIRECT_URL = 'home'
+LOGIN_REDIRECT_URL = 'profile'
